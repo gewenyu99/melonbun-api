@@ -37,7 +37,6 @@ export class DummyData {
         price: { value: i, currency: "CAD" },
         tags: ["api", "test"]
       });
-      console.log(`data has ${i+1} records`);
     }
     return data;
   }
