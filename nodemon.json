@@ -1,0 +1,7 @@
+{
+  "restartable": "rs",
+  "watch": ["lib"],
+  "ext": "ts",
+  "ignore": ["src/**/*.spec.ts"],
+  "exec": "ts-node ./lib/server.ts"
+}

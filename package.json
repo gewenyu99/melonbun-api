@@ -30,7 +30,13 @@
     "express": "^4.16.4",
     "mongoose": "^5.4.19",
     "nodemon": "^1.18.10",
+    "swagger-ui-express": "^4.0.2",
     "ts-node": "^8.0.3",
-    "typescript": "^3.3.3333"
+    "typescript": "^3.3.3333",
+    "typescript-tslint-plugin": "^0.3.1"
+  },
+  "devDependencies": {
+    "jest": "^24.5.0",
+    "ts-jest": "^24.0.0"
   }
 }

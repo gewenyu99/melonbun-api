@@ -11,7 +11,7 @@ const STATUSES = Object.freeze({
 
 export const RequestSchema = new Schema({
 	name: { type: String, required: true, index: true },
-	description: { type: String, required: true },
+	description: { type: String },
 	created_at: { type: Date, default: Date.now },
 	created_by: { type: String },
 	status: { type: String, enum: Object.values(STATUSES) },
