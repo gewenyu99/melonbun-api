@@ -2,11 +2,11 @@ import * as mongoose from 'mongoose';
 import { RequestSchema } from '../models/request';
 import { Request, Response } from 'express';
 
-const Request = mongoose.model('Request', RequestSchema);
+const RequestObj = mongoose.model('Request', RequestSchema);
 export class RequestController {
 
   public addNewRequest (req: Request, res: Response) {                
-    let newRequest = new Request(req.body);
+    let newRequest = new RequestObj(req.body);
 
     newRequest.save((err, request) => {
       if (err){
@@ -17,7 +17,7 @@ export class RequestController {
   }
 
   public getRequests (req: Request, res: Response) {           
-    Request.find({}, (err, request) => {
+    RequestObj.find({}, (err, request) => {
         if (err){
           res.send(err);
         }
@@ -26,7 +26,7 @@ export class RequestController {
   }
 
   public getRequestById (req: Request, res: Response) {
-    Request.findById(req.params.requestId, (err, request) => {
+    RequestObj.findById(req.params.requestId, (err, request) => {
       if (err) {
         res.send(err);
       }
@@ -35,7 +35,7 @@ export class RequestController {
   }
 
   public updateRequest (req: Request, res: Response) {
-    Request.findOneAndUpdate(
+    RequestObj.findOneAndUpdate(
       { _id: req.params.requestId },
       req.body,
       { new: true },
@@ -49,7 +49,7 @@ export class RequestController {
   }
 
   public deleteRequest (req: Request, res: Response) {
-    Request.deleteOne({ _id: req.params.contactId }, (err) => {
+    RequestObj.deleteOne({ _id: req.params.contactId }, (err) => {
       if (err) {
         res.send(err);
       }

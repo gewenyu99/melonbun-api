@@ -6,17 +6,23 @@ import * as swaggerUI from "swagger-ui-express";
 import swaggerDoc = require("./swagger.json");
 import { Routes } from "./routes/routes";
 import config from "./config";
+import { DummyData } from "./utils/dummyData";
 
 class App {
   public app: express.Application = express();
   public mongoUrl: string = config.mongoUrl;
   public appRoutes: Routes = new Routes();
+  public isDBPopulated: boolean = false;
 
   constructor() {
     this.config();
     this.appRoutes.routes(this.app);
     this.mongoSetup();
     this.setUpSwagger();
+    
+    if (!this.isDBPopulated) {
+      this.populateDB();
+    }
   }
 
   private config(): void {
@@ -31,6 +37,12 @@ class App {
 
   private setUpSwagger(): void {
     this.app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
+  }
+
+  private populateDB(): void {
+    const dummy = new DummyData(10);
+    dummy.populateDB();
+    this.isDBPopulated = true;
   }
 }
 
