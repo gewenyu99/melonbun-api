@@ -35,10 +35,12 @@
         "description": "Create new request in system",
         "parameters": [
           {
-            "name": "request",
-            "description": "new request we want to create",
+            "name": "request_body",
+            "description": "New request submitted by the client",
+            "in": "body",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/Request"
+              "$ref": "#/definitions/RequestPostModel"
             }
           }
         ],
@@ -46,10 +48,16 @@
           "application/json"
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "New request is created",
             "schema": {
-              "$ref": "#/definitions/Request"
+              "$ref": "#/definitions/RequestResponseModel"
+            }
+          },
+          "default": {
+            "description": "Unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorModel"
             }
           }
         }
@@ -61,9 +69,18 @@
         "summary": "Get all requests in system",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Get all requests success",
             "schema": {
-              "$ref": "#/definitions/Request"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RequestResponseModel"
+              }
+            }
+          }, 
+          "default": {
+            "description": "Unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorModel"
             }
           }
         }
@@ -88,7 +105,13 @@
           "200": {
             "description": "Request is found",
             "schema": {
-              "$ref": "#/definitions/Request"
+              "$ref": "#/definitions/RequestResponseModel"
+            }
+          },
+          "default": {
+            "description": "Unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorModel"
             }
           }
         }
@@ -100,9 +123,12 @@
         ],
         "responses": {
           "200": {
-            "description": "Request is deleted",
+            "description": "Request is deleted"
+          },
+          "default": {
+            "description": "Unexpected error occurred",
             "schema": {
-              "$ref": "#/definitions/Request"
+              "$ref": "#/definitions/DefaultErrorModel"
             }
           }
         }
@@ -114,11 +140,12 @@
         ],
         "parameters": [
           {
-            "name": "request",
+            "name": "request_body",
             "in": "body",
+            "required": true,
             "description": "Request with new values of properties",
             "schema": {
-              "$ref": "#/definitions/Request"
+              "$ref": "#/definitions/RequestPutModel"
             }
           }
         ],
@@ -126,7 +153,13 @@
           "200": {
             "description": "Request is updated",
             "schema": {
-              "$ref": "#/definitions/Request"
+              "$ref": "#/definitions/RequestResponseModel"
+            }
+          },
+          "default": {
+            "description": "Unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorModel"
             }
           }
         }
@@ -134,13 +167,17 @@
     }
   },
   "definitions": {
-    "Request": {
+    "RequestResponseModel": {
       "required": [
-        "_id",
-        "name"
+        "id",
+        "name",
+        "description",
+        "created_at",
+        "created_by",
+        "status"
       ],
       "properties": {
-        "_id": {
+        "id": {
           "type": "string"
         },
         "name": {
@@ -150,7 +187,8 @@
           "type": "string"
         },
         "created_at": {
-          "type": "date"
+          "type": "string",
+          "format": "date-time"
         },
         "created_by": {
           "type": "string"
@@ -160,17 +198,95 @@
           "enum": ["PENDING", "FULFULLED", "COMPLETE", "INCOMPLETE"]
         },
         "price": {
-          "properties": {
-            "value": {
-              "type": "number"
-            },
-            "currency": {
-              "type": "string"
-            }
-          }
+          "$ref":"#/definitions/Price"
         },
         "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+
+    "RequestPostModel": {
+      "required": [
+        "name",
+        "description",
+        "created_by"
+      ],
+      "properties": {
+        "name": {
           "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "created_by": {
+          "type": "string"
+        },
+        "price": {
+          "$ref":"#/definitions/Price"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+
+    "RequestPutModel": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["PENDING", "FULFULLED", "COMPLETE", "INCOMPLETE"]
+        },
+        "price": {
+          "$ref":"#/definitions/Price"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+
+    "Price": {
+      "required": [
+        "value",
+        "currency"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    },
+
+    "DefaultErrorModel": {
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     }
