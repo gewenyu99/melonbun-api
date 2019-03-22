@@ -3,10 +3,10 @@ import * as mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const STATUSES = Object.freeze({
-  PENDING: 'pending',
-  FULFULLED: 'fulfilled',
-  COMPLETE: 'complete',
-  IMCOMPLETE: 'incomplete'
+  PENDING: 'PENDING',
+  FULFULLED: 'FULFULLED',
+  COMPLETE: 'COMPLETE',
+  INCOMPLETE: 'INCOMPLETE'
 });
 
 export const RequestSchema = new Schema({

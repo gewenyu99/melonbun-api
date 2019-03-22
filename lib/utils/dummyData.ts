@@ -14,7 +14,7 @@ const lorem = new LoremIpsum({
     min: 4
   }
 });
-const STATUSES = ["pending", "fulfilled", "complete", "incomplete"];
+const STATUSES = ["PENDING", "FULFILLED", "COMPLETE", "INCOMPLETE"];
 
 export class DummyData {
   _numDocs: number;
@@ -44,7 +44,7 @@ export class DummyData {
   public populateDB(): void {
     Request.insertMany(this.getData(), (err) => {
       if (err) {
-        console.log(err);
+        console.error(err);
       }
     })
   }
