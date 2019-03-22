@@ -1,0 +1,43 @@
+{
+  "name": "melonbun-api",
+  "version": "1.0.0",
+  "description": "REST API for MelonBun applications",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node ./lib/server.ts",
+    "start": "nodemon ./dist/server.js",
+    "prod": "npm run build && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melonbun-dev/melonbun-api.git"
+  },
+  "keywords": [
+    "MelonBun",
+    "API"
+  ],
+  "bugs": {
+    "url": "https://github.com/melonbun-dev/melonbun-api/issues"
+  },
+  "homepage": "https://github.com/melonbun-dev/melonbun-api#readme",
+  "dependencies": {
+    "@types/express": "^4.16.1",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "lorem-ipsum": "^2.0.0",
+    "mongoose": "^5.4.19",
+    "nodemon": "^1.18.10",
+    "serverless-http": "^1.9.1",
+    "swagger-ui-express": "^4.0.2",
+    "ts-node": "^8.0.3",
+    "typescript": "^3.3.3333",
+    "typescript-tslint-plugin": "^0.3.1"
+  },
+  "devDependencies": {
+    "jest": "^24.5.0",
+    "ts-jest": "^24.0.0"
+  }
+}
