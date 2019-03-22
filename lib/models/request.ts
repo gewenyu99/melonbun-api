@@ -1,13 +1,7 @@
 import * as mongoose from 'mongoose';
+import { STATUSES } from './enums';
 
 const Schema = mongoose.Schema;
-
-const STATUSES = Object.freeze({
-  PENDING: 'PENDING',
-  FULFULLED: 'FULFULLED',
-  COMPLETE: 'COMPLETE',
-  INCOMPLETE: 'INCOMPLETE'
-});
 
 export const RequestSchema = new Schema({
 	name: { type: String },
