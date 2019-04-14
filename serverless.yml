@@ -10,6 +10,11 @@ plugins:
   - serverless-plugin-typescript
   - serverless-offline
 
+package:
+  exclude:
+    - coverage/**
+    - .circleci/**
+
 functions:
   app:
     handler: lib/lambda.handler

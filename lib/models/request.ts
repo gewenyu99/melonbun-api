@@ -18,7 +18,7 @@ const RequestSchema = new Schema({
 	created_at: { type: Date, default: Date.now },
 	created_by: { type: String, required: true },
 	status: { type: String, enum: Object.values(STATUSES) },
-	price: PriceSchema,
+	price: { type: PriceSchema, required: true },
 	tags: [{ type: String }]
 });
 
@@ -37,4 +37,4 @@ RequestSchema.set('toJSON', {
   }
 });
 
-export { RequestSchema };
+export { RequestSchema, PriceSchema };
