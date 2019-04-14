@@ -3,12 +3,38 @@ import { STATUSES } from './enums';
 
 const Schema = mongoose.Schema;
 
-export const RequestSchema = new Schema({
-	name: { type: String },
-	description: { type: String },
+const PriceSchema = new Schema({
+  value: {
+    type: Number,
+    min: 0,
+    required: true
+  },
+  currency: { type: String, required: true }
+});
+
+const RequestSchema = new Schema({
+	name: { type: String, required: true },
+	description: { type: String, required: true },
 	created_at: { type: Date, default: Date.now },
-	created_by: { type: String },
+	created_by: { type: String, required: true },
 	status: { type: String, enum: Object.values(STATUSES) },
-	price: { value: Number, currency: String },
+	price: PriceSchema,
 	tags: [{ type: String }]
 });
+
+PriceSchema.set('toJSON', {
+  transform: function (doc, ret, options) {
+    delete ret._id;
+    delete ret.__v;
+  }
+});
+
+RequestSchema.set('toJSON', {
+  transform: function (doc, ret, options) {
+    ret.id = ret._id;
+    delete ret._id;
+    delete ret.__v;
+  }
+});
+
+export { RequestSchema };

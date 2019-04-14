@@ -1,7 +1,8 @@
 # melonbun-api
 API for MelonBun applications.
 
+Currently deployed on AWS as a **lambda** function using the **serverless** framework.
+
 ## Local Development
 
-Make sure MongoDB is installed or ask Jason for mLab credentials.
-run `npm i && npm start`
+run `npm i && npm run dev`

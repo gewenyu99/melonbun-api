@@ -1,9 +1,8 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as mongoose from "mongoose";
-import * as swaggerUI from "swagger-ui-express";
+import * as cors from "cors";
 
-import swaggerDoc = require("./swagger.json");
 import { Routes } from "./routes/routes";
 import config from "./config";
 import { DummyData } from "./utils/dummyData";
@@ -18,7 +17,6 @@ class App {
     this.config();
     this.appRoutes.routes(this.app);
     this.mongoSetup();
-    this.setUpSwagger();
     
     if (!this.isDBPopulated) {
       this.populateDB();
@@ -26,6 +24,7 @@ class App {
   }
 
   private config(): void {
+    this.app.use(cors());
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
   }
@@ -33,10 +32,6 @@ class App {
   private mongoSetup(): void {
     mongoose.Promise = global.Promise;
     mongoose.connect(this.mongoUrl, { useNewUrlParser: true });
-  }
-
-  private setUpSwagger(): void {
-    this.app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
   }
 
   private populateDB(): void {

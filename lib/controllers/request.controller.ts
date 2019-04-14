@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 import { RequestSchema } from '../models/request';
 import { Request, Response } from 'express';
 
-const RequestObj = mongoose.model('Request', RequestSchema);
+const RequestObj = mongoose.models.Request || mongoose.model('Request', RequestSchema);
 export class RequestController {
 
   public addNewRequest (req: Request, res: Response) {                
