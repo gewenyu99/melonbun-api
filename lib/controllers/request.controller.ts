@@ -49,7 +49,7 @@ export class RequestController {
   }
 
   public deleteRequest (req: Request, res: Response) {
-    RequestObj.deleteOne({ _id: req.params.contactId }, (err) => {
+    RequestObj.deleteOne({ _id: req.params.requestId }, (err) => {
       if (err) {
         res.send(err);
       }
