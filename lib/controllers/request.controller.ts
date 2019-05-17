@@ -9,9 +9,9 @@ export class RequestController {
     let newRequest = new RequestObj(req.body);
 
     newRequest.save((err, request) => {
-      if (err){
+      if (err) {
           res.send(err);
-      }    
+      }
       res.json(request);
     });
   }
@@ -30,7 +30,11 @@ export class RequestController {
       if (err) {
         res.send(err);
       }
-      res.json(request);
+      if (!request) {
+        res.send({ message: "no request found!"});
+      } else {
+        res.json(request);
+      }
     });
   }
 
@@ -49,7 +53,7 @@ export class RequestController {
   }
 
   public deleteRequest (req: Request, res: Response) {
-    RequestObj.deleteOne({ _id: req.params.contactId }, (err) => {
+    RequestObj.deleteOne({ _id: req.params.requestId }, (err) => {
       if (err) {
         res.send(err);
       }
