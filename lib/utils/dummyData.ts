@@ -36,7 +36,8 @@ export class DummyData {
         created_by: "Tester",
         status: statusValues[i % statusValues.length],
         price: { value: i, currency: "CAD" },
-        tags: ["api", "test"]
+        tags: ["api", "test"],
+        fav_state: false
       });
     }
     return data;

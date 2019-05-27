@@ -130,7 +130,7 @@ definitions:
       created_by:
         type: string
       fav_state:
-        type: bool
+        type: boolean
       status:
         type: string
         enum:
