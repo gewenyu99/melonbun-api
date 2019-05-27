@@ -32,7 +32,8 @@ describe("Request model", () => {
       created_at: new Date(),
       created_by: "Tester",
       status: STATUSES.PENDING,
-      price: price
+      price: price,
+      fav_state: true
     });
 
     req.validate(err => {

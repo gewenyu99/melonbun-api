@@ -18,6 +18,7 @@ const RequestSchema = new Schema({
 	created_at: { type: Date, default: Date.now },
 	created_by: { type: String, required: true },
 	status: { type: String, enum: Object.values(STATUSES) },
+  fav_state: { type: Boolean, required: true },
 	price: { type: PriceSchema, required: true },
 	tags: [{ type: String }]
 });

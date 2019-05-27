@@ -116,6 +116,7 @@ definitions:
       - created_at
       - created_by
       - status
+      - fav_state
     properties:
       id:
         type: string
@@ -128,6 +129,8 @@ definitions:
         format: date-time
       created_by:
         type: string
+      fav_state:
+        type: bool
       status:
         type: string
         enum:
